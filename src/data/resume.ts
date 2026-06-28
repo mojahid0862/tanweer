@@ -155,6 +155,15 @@ export const profile: Profile = {
       href: "/certificates/graduation-master-diploma-ohse.pdf",
       cover: "/certificates/graduation-master-diploma-ohse-cover.jpg",
       pages: 8
+    },
+    {
+      title: "Experience Certificates",
+      issuer: "China Harbour Engineering Company, Qatar Building Engineering Company, CDM Smith, Metro Tunnelling Chennai, DLF, and COMACOE",
+      description:
+        "Public redacted experience certificate bundle covering HSE and safety roles across Qatar and India.",
+      href: "/certificates/experience-certificate.pdf",
+      cover: "/certificates/experience-certificate-cover.jpg",
+      pages: 7
     }
   ],
   knowsAbout: [
