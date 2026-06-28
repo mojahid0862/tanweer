@@ -54,6 +54,11 @@ export const metadata: Metadata = {
       "Roads, drainage, tunneling, utilities, construction safety, ISO 45001, NEBOSH, OSHA, GRADIOSH.",
     images: ["/assets/tanweerul-haque.png"]
   },
+  icons: {
+    icon: "/favicon.svg",
+    shortcut: "/favicon.svg",
+    apple: "/assets/tanweerul-haque.png"
+  },
   other: {
     "geo.region": "IN-DL",
     "geo.placename": "New Delhi, India",

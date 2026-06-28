@@ -11,10 +11,12 @@ import {
   CalendarDays,
   CheckCircle2,
   ChevronRight,
+  ClipboardCheck,
   Download,
   GraduationCap,
   HardHat,
   Languages,
+  Leaf,
   Mail,
   MapPin,
   Phone,
@@ -67,7 +69,8 @@ export function AnimatedPortfolio({ profile }: Props) {
         <header className="topbar" aria-label="Primary navigation">
           <a className="brand-mark" href="#home" aria-label={`${profile.name} home`}>
             <ShieldCheck aria-hidden="true" />
-            <span>TH</span>
+            <span className="brand-initials">TH</span>
+            <span className="brand-role">HSE CIVIL</span>
           </a>
           <nav>
             {sections.map((section) => (
@@ -98,11 +101,20 @@ export function AnimatedPortfolio({ profile }: Props) {
                   Qatar and India civil infrastructure safety
                 </p>
                 <h1>{profile.name}</h1>
-                <p className="hero-title">{profile.title}</p>
+                <p className="hero-title">
+                  <span>HSE Engineer Civil</span>
+                  <i aria-hidden="true" />
+                  <span>{profile.title}</span>
+                </p>
                 <p className="hero-lede">
                   Safety-led delivery for roads, drainage, tunneling, utilities, and high-risk
                   construction environments.
                 </p>
+                <div className="hero-disciplines" aria-label="Civil HSE focus areas">
+                  <HseDiscipline icon={<HardHat />} title="Health & Safety" text="Site safety control" />
+                  <HseDiscipline icon={<Leaf />} title="Environmental" text="Compliance reporting" />
+                  <HseDiscipline icon={<ClipboardCheck />} title="Risk Assessment" text="HIRA, JSA, PTW" />
+                </div>
                 <div className="hero-actions">
                   <a className="button button-primary" href={`mailto:${profile.email}`}>
                     <Mail size={19} aria-hidden="true" />
@@ -141,8 +153,28 @@ export function AnimatedPortfolio({ profile }: Props) {
                   <Metric value="12" label="Certificates" />
                   <Metric value="5" label="Languages" />
                 </div>
+                <div className="hero-cert-strip" aria-label="Selected credentials">
+                  <span>NEBOSH</span>
+                  <span>ISO 45001</span>
+                  <span>OSHA 30HRS</span>
+                </div>
               </motion.aside>
             </div>
+            <motion.div
+              className="hero-project-strip"
+              initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.25, ease: revealEase }}
+              aria-label="Featured civil infrastructure projects"
+            >
+              {profile.projects.slice(0, 3).map((project) => (
+                <article key={project.name}>
+                  <span>{project.role}</span>
+                  <strong>{project.name}</strong>
+                  <small>{project.period}</small>
+                </article>
+              ))}
+            </motion.div>
           </section>
 
           <Section id="summary" eyebrow="Profile" title="Safety judgement for complex civil works">
@@ -402,6 +434,59 @@ function EngineeringScene() {
         context.stroke();
       }
 
+      context.strokeStyle = "rgba(24, 33, 29, 0.1)";
+      context.lineWidth = 1.4;
+      context.beginPath();
+      context.moveTo(rect.width * 0.06, rect.height * 0.16);
+      context.lineTo(rect.width * 0.28, rect.height * 0.04);
+      context.lineTo(rect.width * 0.42, rect.height * 0.18);
+      context.lineTo(rect.width * 0.08, rect.height * 0.32);
+      context.closePath();
+      context.stroke();
+
+      context.strokeStyle = "rgba(216, 138, 0, 0.48)";
+      context.lineWidth = 3;
+      const craneX = rect.width * 0.82;
+      const craneY = rect.height * 0.17;
+      context.beginPath();
+      context.moveTo(craneX, craneY);
+      context.lineTo(craneX, craneY + 210);
+      context.moveTo(craneX - 125, craneY);
+      context.lineTo(craneX + 145, craneY);
+      context.moveTo(craneX - 90, craneY);
+      context.lineTo(craneX - 62, craneY + 26);
+      context.lineTo(craneX - 34, craneY);
+      context.moveTo(craneX + 94, craneY);
+      context.lineTo(craneX + 94, craneY + 74);
+      context.stroke();
+
+      context.fillStyle = "rgba(216, 138, 0, 0.72)";
+      context.fillRect(craneX + 78, craneY + 74, 32, 22);
+
+      context.strokeStyle = "rgba(24, 33, 29, 0.22)";
+      context.lineWidth = 3;
+      const bridgeBase = rect.height * 0.47;
+      const bridgeLeft = rect.width * 0.45;
+      const bridgeRight = rect.width * 0.69;
+      context.beginPath();
+      context.moveTo(bridgeLeft, bridgeBase + 124);
+      context.lineTo(bridgeLeft, bridgeBase - 12);
+      context.moveTo(bridgeRight, bridgeBase + 124);
+      context.lineTo(bridgeRight, bridgeBase - 12);
+      context.moveTo(bridgeLeft - 60, bridgeBase + 116);
+      context.bezierCurveTo(rect.width * 0.52, bridgeBase + 62, rect.width * 0.62, bridgeBase + 62, bridgeRight + 60, bridgeBase + 116);
+      context.stroke();
+
+      context.strokeStyle = "rgba(24, 33, 29, 0.18)";
+      context.lineWidth = 1;
+      for (let index = 0; index < 8; index += 1) {
+        const x = bridgeLeft + index * ((bridgeRight - bridgeLeft) / 7);
+        context.beginPath();
+        context.moveTo(x, bridgeBase - 10);
+        context.lineTo(x + (index - 3.5) * 10, bridgeBase + 104);
+        context.stroke();
+      }
+
       const pulse = shouldReduceMotion ? 0 : Math.sin(frame * 0.025) * 8;
       const roadY = rect.height * 0.62;
 
@@ -488,6 +573,24 @@ function Metric({ value, label }: { value: string; label: string }) {
       <strong>{value}</strong>
       <span>{label}</span>
     </div>
+  );
+}
+
+function HseDiscipline({
+  icon,
+  title,
+  text
+}: {
+  icon: React.ReactElement;
+  title: string;
+  text: string;
+}) {
+  return (
+    <article className="hse-discipline">
+      <span>{icon}</span>
+      <strong>{title}</strong>
+      <small>{text}</small>
+    </article>
   );
 }
 
