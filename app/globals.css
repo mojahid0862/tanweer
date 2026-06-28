@@ -845,21 +845,40 @@ button {
 }
 
 .certificate-documents {
-  margin-top: 20px;
-  padding: 24px;
-  border: 1px solid rgba(24, 33, 29, 0.12);
+  position: relative;
+  margin-top: 24px;
+  padding: 28px;
+  overflow: hidden;
+  border: 1px solid rgba(8, 44, 70, 0.12);
   border-radius: 8px;
-  background: linear-gradient(135deg, rgba(8, 44, 70, 0.04), rgba(242, 119, 34, 0.06)), rgba(255, 255, 255, 0.78);
-  box-shadow: 0 18px 50px rgba(21, 26, 23, 0.08);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(248, 250, 246, 0.9)),
+    radial-gradient(circle at 94% 0%, rgba(242, 119, 34, 0.12), transparent 34%);
+  box-shadow: 0 22px 70px rgba(21, 26, 23, 0.1);
+}
+
+.certificate-documents::before {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(8, 44, 70, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(8, 44, 70, 0.05) 1px, transparent 1px);
+  background-size: 38px 38px;
+  content: "";
+  mask-image: linear-gradient(90deg, transparent, #000 14%, #000 86%, transparent);
+  opacity: 0.42;
 }
 
 .certificate-documents__heading {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-wrap: wrap;
   align-items: end;
   justify-content: space-between;
   gap: 12px;
-  margin-bottom: 18px;
+  margin-bottom: 22px;
 }
 
 .certificate-documents__heading span {
@@ -874,67 +893,103 @@ button {
 
 .certificate-documents__heading strong {
   color: var(--navy);
-  font-size: 1.35rem;
+  font-size: 1.45rem;
   line-height: 1.2;
 }
 
 .certificate-document-grid {
+  position: relative;
+  z-index: 1;
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 18px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
 }
 
 .certificate-document-card {
-  display: grid;
-  grid-template-columns: minmax(210px, 0.55fr) minmax(0, 1fr);
-  min-height: 300px;
+  display: flex;
+  min-width: 0;
+  min-height: 100%;
+  flex-direction: column;
   overflow: hidden;
   border: 1px solid rgba(8, 44, 70, 0.12);
   border-radius: 8px;
-  background: var(--white);
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 16px 36px rgba(8, 44, 70, 0.08);
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+
+.certificate-document-card:hover {
+  border-color: rgba(242, 119, 34, 0.28);
+  box-shadow: 0 24px 54px rgba(8, 44, 70, 0.12);
+  transform: translateY(-3px);
 }
 
 .certificate-cover-button {
   position: relative;
-  display: block;
-  min-height: 100%;
-  padding: 0;
+  display: grid;
+  height: 270px;
+  place-items: center;
+  padding: 16px;
   border: 0;
-  background: #eef2ec;
+  border-bottom: 1px solid rgba(8, 44, 70, 0.1);
+  background:
+    linear-gradient(145deg, rgba(8, 44, 70, 0.08), rgba(242, 119, 34, 0.08)),
+    #eef3ef;
   overflow: hidden;
 }
 
+.certificate-cover-button::before {
+  position: absolute;
+  inset: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: 8px;
+  content: "";
+}
+
 .certificate-cover-button img {
-  width: 100%;
+  width: auto;
+  max-width: 100%;
   height: 100%;
-  object-fit: cover;
-  transition: transform 220ms ease;
+  object-fit: contain;
+  border: 1px solid rgba(8, 44, 70, 0.14);
+  border-radius: 4px;
+  background: var(--white);
+  box-shadow: 0 14px 30px rgba(8, 44, 70, 0.16);
+  transition:
+    box-shadow 220ms ease,
+    transform 220ms ease;
 }
 
 .certificate-cover-button span {
   position: absolute;
-  right: 14px;
-  bottom: 14px;
+  right: 16px;
+  bottom: 16px;
   display: inline-flex;
   align-items: center;
   gap: 7px;
   border-radius: 999px;
-  padding: 9px 12px;
-  background: rgba(8, 44, 70, 0.9);
+  padding: 10px 13px;
+  background: rgba(8, 44, 70, 0.92);
   color: var(--white);
-  font-size: 0.86rem;
+  font-size: 0.84rem;
   font-weight: 900;
+  box-shadow: 0 12px 26px rgba(8, 44, 70, 0.24);
 }
 
 .certificate-cover-button:hover img {
-  transform: scale(1.035);
+  box-shadow: 0 18px 38px rgba(8, 44, 70, 0.2);
+  transform: translateY(-4px) scale(1.015);
 }
 
 .certificate-document-body {
   display: flex;
+  flex: 1;
   min-width: 0;
   flex-direction: column;
-  padding: 22px;
+  padding: 20px;
 }
 
 .certificate-document-body > span {
@@ -947,19 +1002,22 @@ button {
 .certificate-document-body h3 {
   margin: 8px 0 8px;
   color: var(--navy);
-  font-size: 1.22rem;
+  font-size: 1.14rem;
   line-height: 1.2;
 }
 
 .certificate-document-body p {
   margin: 0;
   color: #2a312d;
+  font-size: 0.96rem;
+  line-height: 1.48;
 }
 
 .certificate-document-body small {
   display: block;
   margin-top: 12px;
   color: var(--muted);
+  font-size: 0.86rem;
   line-height: 1.35;
 }
 
@@ -973,7 +1031,7 @@ button {
 
 .certificate-actions .button {
   min-height: 42px;
-  padding: 10px 14px;
+  padding: 10px 15px;
 }
 
 .award-item strong {
@@ -1242,6 +1300,12 @@ button {
   }
 }
 
+@media (max-width: 1240px) {
+  .certificate-document-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 @media (max-width: 1060px) {
   .topbar {
     grid-template-columns: auto auto;
@@ -1276,13 +1340,12 @@ button {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .certificate-document-grid,
-  .certificate-document-card {
+  .certificate-document-grid {
     grid-template-columns: 1fr;
   }
 
   .certificate-cover-button {
-    min-height: 260px;
+    height: 300px;
   }
 }
 

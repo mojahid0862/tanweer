@@ -638,7 +638,7 @@ function CertificateDocuments({
           <FileText size={18} aria-hidden="true" />
           Verified documents
         </span>
-        <strong>View and download certificates</strong>
+        <strong>Preview and download certificates</strong>
       </div>
       <div className="certificate-document-grid">
         {documents.map((document) => (
@@ -647,12 +647,12 @@ function CertificateDocuments({
               className="certificate-cover-button"
               type="button"
               onClick={() => onView(document)}
-              aria-label={`View ${document.title}`}
+              aria-label={`Preview ${document.title}`}
             >
-              <Image src={document.cover} alt={`${document.title} preview`} width={1200} height={760} />
+              <Image src={document.cover} alt={`${document.title} preview`} width={900} height={1280} />
               <span>
                 <Eye size={18} aria-hidden="true" />
-                View
+                Preview
               </span>
             </button>
             <div className="certificate-document-body">
@@ -663,7 +663,7 @@ function CertificateDocuments({
               <div className="certificate-actions">
                 <button type="button" className="button button-primary" onClick={() => onView(document)}>
                   <Eye size={18} aria-hidden="true" />
-                  View Certificate
+                  Preview
                 </button>
                 <a className="button button-secondary" href={document.href} download>
                   <Download size={18} aria-hidden="true" />
@@ -688,12 +688,12 @@ function CertificateModal({
   if (!certificate) return null;
 
   return (
-    <div className="certificate-modal" role="dialog" aria-modal="true" aria-label={`${certificate.title} viewer`}>
+    <div className="certificate-modal" role="dialog" aria-modal="true" aria-label={`${certificate.title} preview`}>
       <button className="certificate-modal__backdrop" type="button" onClick={onClose} aria-label="Close certificate viewer" />
       <div className="certificate-modal__panel">
         <header>
           <div>
-            <span>Certificate document</span>
+            <span>Certificate preview</span>
             <h2>{certificate.title}</h2>
           </div>
           <div className="certificate-modal__actions">
