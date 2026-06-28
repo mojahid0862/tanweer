@@ -373,7 +373,7 @@ export function AnimatedPortfolio({ profile }: Props) {
                 <p className="signature">Name: {profile.declarationName}</p>
                 <p className="signature-muted">Signature: / Date:</p>
                 <p className="site-credit">
-                  Made with love by{" "}
+                  Made with ❤️ by{" "}
                   <a href="https://mojahidulhaque.com/" target="_blank" rel="noreferrer">
                     Mojahid Ul Haque
                   </a>
