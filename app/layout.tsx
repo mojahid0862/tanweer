@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { profile } from "@/data/resume";
-
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://tanweerul-haque.com";
+import { siteUrl } from "@/data/site";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),

@@ -1,7 +1,6 @@
 import { AnimatedPortfolio } from "@/components/AnimatedPortfolio";
 import { profile } from "@/data/resume";
-
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://tanweerul-haque.com";
+import { siteUrl } from "@/data/site";
 
 const personJsonLd = {
   "@context": "https://schema.org",
