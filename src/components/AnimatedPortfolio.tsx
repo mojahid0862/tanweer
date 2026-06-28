@@ -370,8 +370,6 @@ export function AnimatedPortfolio({ profile }: Props) {
                 </p>
                 <h2>Bring senior safety control to the next project.</h2>
                 <p>{profile.declaration}</p>
-                <p className="signature">Name: {profile.declarationName}</p>
-                <p className="signature-muted">Signature: / Date:</p>
                 <p className="site-credit">
                   Made with ❤️ by{" "}
                   <a href="https://mojahidulhaque.com/" target="_blank" rel="noreferrer">
