@@ -8,7 +8,7 @@ const personJsonLd = {
   "@type": "Person",
   name: profile.name,
   url: siteUrl,
-  image: `${siteUrl}/assets/tanweerul-haque-current.jpg`,
+  image: `${siteUrl}/assets/tanweerul-haque-professional.jpg`,
   jobTitle: profile.jobTitles,
   description: profile.summary,
   email: profile.email,
@@ -21,6 +21,7 @@ const personJsonLd = {
   },
   knowsLanguage: profile.languages.map((language) => language.name),
   knowsAbout: profile.knowsAbout,
+  sameAs: [profile.linkedin],
   award: profile.awards.map((award) => `${award.title} - ${award.issuer}`),
   alumniOf: profile.education.map((item) => ({
     "@type": "EducationalOrganization",

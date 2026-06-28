@@ -166,6 +166,17 @@ button {
   color: var(--charcoal);
 }
 
+.button-linkedin {
+  border-color: rgba(10, 102, 194, 0.18);
+  background: #0a66c2;
+  color: var(--white);
+  box-shadow: 0 18px 38px rgba(10, 102, 194, 0.18);
+}
+
+.button-linkedin:hover {
+  background: #07549f;
+}
+
 .topbar-cta:hover,
 .button:hover {
   transform: translateY(-2px);

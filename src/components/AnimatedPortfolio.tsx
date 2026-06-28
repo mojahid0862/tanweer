@@ -14,6 +14,7 @@ import {
   ClipboardCheck,
   Download,
   Eye,
+  ExternalLink,
   FileText,
   GraduationCap,
   HardHat,
@@ -146,6 +147,10 @@ export function AnimatedPortfolio({ profile }: Props) {
                     <Building2 size={19} aria-hidden="true" />
                     View Projects
                   </a>
+                  <a className="button button-linkedin" href={profile.linkedin} target="_blank" rel="noreferrer">
+                    <ExternalLink size={19} aria-hidden="true" />
+                    LinkedIn
+                  </a>
                 </div>
               </motion.div>
 
@@ -157,7 +162,7 @@ export function AnimatedPortfolio({ profile }: Props) {
               >
                 <div className="portrait-wrap">
                   <Image
-                    src="/assets/tanweerul-haque-current.jpg"
+                    src="/assets/tanweerul-haque-professional.jpg"
                     alt={`${profile.name} portrait`}
                     width={720}
                     height={720}
@@ -380,6 +385,10 @@ export function AnimatedPortfolio({ profile }: Props) {
                 <a className="button button-secondary" href="/resume-tanweerul-haque.pdf" download>
                   <Download size={19} aria-hidden="true" />
                   Download Resume
+                </a>
+                <a className="button button-linkedin" href={profile.linkedin} target="_blank" rel="noreferrer">
+                  <ExternalLink size={19} aria-hidden="true" />
+                  LinkedIn profile
                 </a>
               </div>
             </motion.div>

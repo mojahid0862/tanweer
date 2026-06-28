@@ -62,6 +62,7 @@ export type Profile = {
   summary: string;
   email: string;
   phones: string[];
+  linkedin: string;
   address: string;
   skillStatement: string;
   languages: Language[];
@@ -89,6 +90,7 @@ export const profile: Profile = {
   ],
   email: "haneefa.zohra@gmail.com",
   phones: ["+974 55740090", "+91 8056237298"],
+  linkedin: "https://www.linkedin.com/in/tanweerul-haque-3037b759/",
   address: "Meer Vihar, Madanpur Dabas, Kanjhawala, New Delhi",
   skillStatement: "Strong leadership, communication, and analytical skills.",
   summary:
