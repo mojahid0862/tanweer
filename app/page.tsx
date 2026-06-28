@@ -8,7 +8,7 @@ const personJsonLd = {
   "@type": "Person",
   name: profile.name,
   url: siteUrl,
-  image: `${siteUrl}/assets/tanweerul-haque.png`,
+  image: `${siteUrl}/assets/tanweerul-haque-current.jpg`,
   jobTitle: profile.jobTitles,
   description: profile.summary,
   email: profile.email,
@@ -26,10 +26,19 @@ const personJsonLd = {
     "@type": "EducationalOrganization",
     name: item.institution
   })),
-  hasCredential: profile.certifications.map((credential) => ({
-    "@type": "EducationalOccupationalCredential",
-    name: credential
-  })),
+  hasCredential: [
+    ...profile.certifications.map((credential) => ({
+      "@type": "EducationalOccupationalCredential",
+      name: credential
+    })),
+    ...profile.certificateDocuments.map((certificate) => ({
+      "@type": "EducationalOccupationalCredential",
+      name: certificate.title,
+      credentialCategory: "Certificate document",
+      recognizedBy: certificate.issuer,
+      url: `${siteUrl}${certificate.href}`
+    }))
+  ],
   worksFor: {
     "@type": "Organization",
     name: "Parsons International Limited"

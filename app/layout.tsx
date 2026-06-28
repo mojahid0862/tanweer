@@ -39,9 +39,9 @@ export const metadata: Metadata = {
       "Portfolio, projects, certifications, and experience for a civil infrastructure HSE professional with 20+ years in high-risk construction environments.",
     images: [
       {
-        url: "/assets/tanweerul-haque.png",
-        width: 720,
-        height: 720,
+        url: "/assets/tanweerul-haque-current.jpg",
+        width: 900,
+        height: 900,
         alt: `${profile.name} portrait`
       }
     ],
@@ -52,12 +52,12 @@ export const metadata: Metadata = {
     title: `${profile.name} | Civil Infrastructure HSE Professional`,
     description:
       "Roads, drainage, tunneling, utilities, construction safety, ISO 45001, NEBOSH, OSHA, GRADIOSH.",
-    images: ["/assets/tanweerul-haque.png"]
+    images: ["/assets/tanweerul-haque-current.jpg"]
   },
   icons: {
     icon: "/favicon.svg",
     shortcut: "/favicon.svg",
-    apple: "/assets/tanweerul-haque.png"
+    apple: "/assets/tanweerul-haque-current.jpg"
   },
   other: {
     "geo.region": "IN-DL",

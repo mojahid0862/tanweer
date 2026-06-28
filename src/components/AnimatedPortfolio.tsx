@@ -13,6 +13,8 @@ import {
   ChevronRight,
   ClipboardCheck,
   Download,
+  Eye,
+  FileText,
   GraduationCap,
   HardHat,
   Languages,
@@ -22,10 +24,11 @@ import {
   Phone,
   ShieldCheck,
   Sparkles,
-  Wrench
+  Wrench,
+  X
 } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
-import type { Experience, Profile, Project } from "@/data/resume";
+import type { CertificateDocument, Experience, Profile, Project } from "@/data/resume";
 
 type Props = {
   profile: Profile;
@@ -49,12 +52,31 @@ const revealEase: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
 export function AnimatedPortfolio({ profile }: Props) {
   const [loaded, setLoaded] = useState(false);
+  const [activeCertificate, setActiveCertificate] = useState<CertificateDocument | null>(null);
   const shouldReduceMotion = useReducedMotion();
 
   useEffect(() => {
     const timer = window.setTimeout(() => setLoaded(true), shouldReduceMotion ? 180 : 850);
     return () => window.clearTimeout(timer);
   }, [shouldReduceMotion]);
+
+  useEffect(() => {
+    if (!activeCertificate) return;
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setActiveCertificate(null);
+      }
+    };
+
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", onKeyDown);
+
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [activeCertificate]);
 
   const currentProject = profile.projects[0];
   const currentRole = profile.experiences[0];
@@ -135,7 +157,7 @@ export function AnimatedPortfolio({ profile }: Props) {
               >
                 <div className="portrait-wrap">
                   <Image
-                    src="/assets/tanweerul-haque.png"
+                    src="/assets/tanweerul-haque-current.jpg"
                     alt={`${profile.name} portrait`}
                     width={720}
                     height={720}
@@ -312,6 +334,11 @@ export function AnimatedPortfolio({ profile }: Props) {
                 </div>
               </motion.div>
             </div>
+            <CertificateDocuments
+              documents={profile.certificateDocuments}
+              reduceMotion={shouldReduceMotion}
+              onView={setActiveCertificate}
+            />
           </Section>
 
           <Section id="answers" eyebrow="Answer-ready profile" title="Direct answers for recruiters and search engines">
@@ -359,6 +386,7 @@ export function AnimatedPortfolio({ profile }: Props) {
           </section>
         </main>
       </div>
+      <CertificateModal certificate={activeCertificate} onClose={() => setActiveCertificate(null)} />
     </>
   );
 }
@@ -591,6 +619,96 @@ function HseDiscipline({
       <strong>{title}</strong>
       <small>{text}</small>
     </article>
+  );
+}
+
+function CertificateDocuments({
+  documents,
+  reduceMotion,
+  onView
+}: {
+  documents: CertificateDocument[];
+  reduceMotion: boolean | null;
+  onView: (certificate: CertificateDocument) => void;
+}) {
+  return (
+    <motion.div className="certificate-documents" {...revealProps(reduceMotion, 0.12)}>
+      <div className="certificate-documents__heading">
+        <span>
+          <FileText size={18} aria-hidden="true" />
+          Verified documents
+        </span>
+        <strong>View and download certificates</strong>
+      </div>
+      <div className="certificate-document-grid">
+        {documents.map((document) => (
+          <article className="certificate-document-card" key={document.href}>
+            <button
+              className="certificate-cover-button"
+              type="button"
+              onClick={() => onView(document)}
+              aria-label={`View ${document.title}`}
+            >
+              <Image src={document.cover} alt={`${document.title} preview`} width={1200} height={760} />
+              <span>
+                <Eye size={18} aria-hidden="true" />
+                View
+              </span>
+            </button>
+            <div className="certificate-document-body">
+              <span>{document.pages} page PDF</span>
+              <h3>{document.title}</h3>
+              <p>{document.description}</p>
+              <small>{document.issuer}</small>
+              <div className="certificate-actions">
+                <button type="button" className="button button-primary" onClick={() => onView(document)}>
+                  <Eye size={18} aria-hidden="true" />
+                  View Certificate
+                </button>
+                <a className="button button-secondary" href={document.href} download>
+                  <Download size={18} aria-hidden="true" />
+                  Download
+                </a>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </motion.div>
+  );
+}
+
+function CertificateModal({
+  certificate,
+  onClose
+}: {
+  certificate: CertificateDocument | null;
+  onClose: () => void;
+}) {
+  if (!certificate) return null;
+
+  return (
+    <div className="certificate-modal" role="dialog" aria-modal="true" aria-label={`${certificate.title} viewer`}>
+      <button className="certificate-modal__backdrop" type="button" onClick={onClose} aria-label="Close certificate viewer" />
+      <div className="certificate-modal__panel">
+        <header>
+          <div>
+            <span>Certificate document</span>
+            <h2>{certificate.title}</h2>
+          </div>
+          <div className="certificate-modal__actions">
+            <a className="button button-secondary" href={certificate.href} download>
+              <Download size={18} aria-hidden="true" />
+              Download
+            </a>
+            <button className="modal-close" type="button" onClick={onClose} aria-label="Close">
+              <X size={22} aria-hidden="true" />
+            </button>
+          </div>
+        </header>
+        <iframe src={`${certificate.href}#view=FitH`} title={`${certificate.title} PDF viewer`} />
+      </div>
+    </div>
   );
 }
 

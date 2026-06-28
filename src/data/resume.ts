@@ -46,6 +46,15 @@ export type Faq = {
   answer: string;
 };
 
+export type CertificateDocument = {
+  title: string;
+  issuer: string;
+  description: string;
+  href: string;
+  cover: string;
+  pages: number;
+};
+
 export type Profile = {
   name: string;
   title: string;
@@ -59,6 +68,7 @@ export type Profile = {
   awards: Award[];
   education: Education[];
   certifications: string[];
+  certificateDocuments: CertificateDocument[];
   experiences: Experience[];
   projects: Project[];
   declaration: string;
@@ -126,6 +136,26 @@ export const profile: Profile = {
     "COSHH Training",
     "First Aid",
     "Fire Fighting"
+  ],
+  certificateDocuments: [
+    {
+      title: "Professional Certificates",
+      issuer: "Institution of Occupational Safety and Health and other professional bodies",
+      description:
+        "Scanned professional HSE certificate bundle including occupational safety and health credentials.",
+      href: "/certificates/professional-certificates.pdf",
+      cover: "/certificates/professional-certificates-cover.jpg",
+      pages: 16
+    },
+    {
+      title: "Graduation and Master Diploma OHSE",
+      issuer: "B.R. Ambedkar Bihar University and Bharat Sevak Samaj",
+      description:
+        "Graduation certificate and Master Diploma in Occupational Health, Safety, Environment and Risk Management documents.",
+      href: "/certificates/graduation-master-diploma-ohse.pdf",
+      cover: "/certificates/graduation-master-diploma-ohse-cover.jpg",
+      pages: 8
+    }
   ],
   knowsAbout: [
     "Risk assessments",
