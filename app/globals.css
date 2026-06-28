@@ -1133,6 +1133,23 @@ button {
   margin-top: 4px;
 }
 
+.site-credit {
+  margin-top: 10px;
+  font-size: 0.72rem;
+  line-height: 1.4;
+}
+
+.site-credit a {
+  color: rgba(244, 177, 62, 0.9);
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.site-credit a:hover {
+  color: var(--white);
+  text-decoration: underline;
+}
+
 .contact-actions {
   display: grid;
   gap: 12px;

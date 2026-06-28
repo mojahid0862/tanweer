@@ -372,6 +372,12 @@ export function AnimatedPortfolio({ profile }: Props) {
                 <p>{profile.declaration}</p>
                 <p className="signature">Name: {profile.declarationName}</p>
                 <p className="signature-muted">Signature: / Date:</p>
+                <p className="site-credit">
+                  Made with love by{" "}
+                  <a href="https://mojahidulhaque.com/" target="_blank" rel="noreferrer">
+                    Mojahid Ul Haque
+                  </a>
+                </p>
               </div>
               <div className="contact-actions">
                 <a className="button button-primary" href={`mailto:${profile.email}`}>
